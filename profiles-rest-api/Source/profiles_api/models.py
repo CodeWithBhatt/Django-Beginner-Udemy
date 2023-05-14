@@ -1,3 +1,4 @@
+from tabnanny import verbose
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 
@@ -25,7 +26,7 @@ class UserProfileManager(BaseUserManager):
 
         return User
 
-    def create_superUser(self, email, name, password):
+    def create_superuser(self, email, name, password):
         """Create a new super user"""
         User = self.create_user(email, name, password)
         User.is_superuser = True
