@@ -1,9 +1,10 @@
 # from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status, viewsets
-from . import serializer, models, permissions
+from rest_framework import status, viewsets, filters
 from rest_framework.authentication import TokenAuthentication
+
+from . import serializer, models, permissions
 
 # Create your views here.
 class HelloAPIView(APIView):
@@ -90,4 +91,5 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     queryset = models.UserProfile.objects.all()
     authentication_classes = (TokenAuthentication,)
     permission_classes = (permissions.UpdateOwnProfile, )
-    
+    filter_backends = (filters.SearchFilter, )
+    search_fields = ('name', 'email', )
